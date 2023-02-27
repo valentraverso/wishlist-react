@@ -23,12 +23,29 @@ export default function ListWishes({completed}) {
 
     const handleDelete = (id) => {
         deleteWish(id);
-        setWishList(JSON.parse(localStorage.getItem("wish-list")));
+        const wishObj = JSON.parse(localStorage.getItem("wish-list"));
+
+        if(wishObj === null){
+            setWishList([]);
+            return;
+        } 
+
+        if(completed !== undefined){
+            setWishList(wishObj.filter(item => item.completed === completed));
+        }else{
+            setWishList(wishObj);
+        }
     }
 
     const handleComplete = (id) => {
         changeWishStatus(id);
-        setWishList(JSON.parse(localStorage.getItem("wish-list")));
+        const wishObj = JSON.parse(localStorage.getItem("wish-list"));
+
+        if(completed !== undefined){
+            setWishList(wishObj.filter(item => item.completed === completed));
+        }else{
+            setWishList(wishObj);
+        }
     }
 
     return (

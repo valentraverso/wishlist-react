@@ -1,0 +1,20 @@
+.status-nav__div{
+    display: flex;
+
+    justify-content: center;
+
+    margin: 1rem 0;
+}
+
+.nav-buttons__div{
+    width: 50%;
+}
+
+.nav-buttons__div span{
+    margin-right: 10px;
+}
+
+.active{
+    color:rgb(95, 95, 233);
+    font-weight: 600;
+}
