@@ -22,7 +22,7 @@ export default function AddWish() {
     return (
         <div className="add-wish__div">
             <form onSubmit={handleSubmit}>
-                <input type="text" name="wishTitle" value={wishTitle} onChange={(e) => { setWishTitle(e.target.value) }} />
+                <input type="text" name="wishTitle" value={wishTitle} placeholder='🖊️ Walk the dog' onChange={(e) => { setWishTitle(e.target.value) }} />
             </form>
         </div>
     )
