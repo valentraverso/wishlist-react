@@ -63,3 +63,10 @@
 .clear-wish__div span{
     cursor: pointer;
 }
+
+.change-wish-title__input{
+    width: 100%;
+    border:0;
+
+    font-size: 20px;
+}

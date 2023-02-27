@@ -1,6 +1,7 @@
 import Layout from "../views/layouts/Layout.jsx";
 
-import Home from "../views/pages/Home/Home.jsx";
+import All from "../views/pages/All/All.jsx";
+import Active from "../views/pages/Active/Active.jsx";
 
 const routes = [
     {
@@ -11,8 +12,12 @@ const routes = [
             {
                 path: "/",
                 exact: true,
-                component: Home
-            },
+                component: All
+            },{
+                path: 'active',
+                exact: true,
+                component: Active
+            }
         ]
     }
 ]

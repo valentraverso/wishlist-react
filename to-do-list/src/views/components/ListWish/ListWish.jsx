@@ -3,11 +3,22 @@ import useWishContext from "../../../context/WishContext";
 import { deleteWish, changeWishStatus } from "../../../utils/utils";
 import './ListWish.css';
 
-export default function ListWishes() {
+export default function ListWishes({completed}) {
     const [wishList, setWishList] = useWishContext();
 
     useEffect(() => {
-        setWishList(JSON.parse(localStorage.getItem("wish-list")));
+        const wishObj = JSON.parse(localStorage.getItem("wish-list"));
+
+        if(wishObj === null){
+            setWishList([]);
+            return;
+        } 
+
+        if(completed !== undefined){
+            setWishList(wishObj.filter(item => item.completed === completed));
+        }else{
+            setWishList(wishObj);
+        }
     }, []);;
 
     const handleDelete = (id) => {
@@ -38,9 +49,7 @@ export default function ListWishes() {
                                         }
                                     </div>
                                     <div className="info-wish__div">
-                                        <span>
-                                            {item.title}
-                                        </span>
+                                        <input className="change-wish-title__input" defaultValue={item.title} type='text' />
                                     </div>
                                     <div className="clear-wish__div">
                                         <span onClick={() => handleDelete(item.id)}>X</span>
@@ -50,7 +59,7 @@ export default function ListWishes() {
                         }
                     </div>
                     :
-                    <h1>Please add tasks ☝️</h1>
+                    <h1>Theres no active Task 🥲</h1>
             }
         </section>
     )
