@@ -1,0 +1,65 @@
+.list-wishes__section{
+    width: 50%;
+
+    margin: 20px auto;
+}
+
+.completed-task__span {
+    display: block;
+
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+
+    background-color: blue;
+}
+
+.uncompleted-task__span {
+    display: block;
+
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+
+    background-color: grey;
+}
+
+.row-list__div{
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+
+    border-bottom: 1px solid #cdcdcd;
+}
+
+.status-wish__div{
+    display: flex;
+
+    width: 10%;
+    justify-content: center;
+    align-items: center;
+}
+
+.status-wish__div span{
+    cursor: pointer;
+}
+
+.info-wish__div{
+    display: flex;
+
+    width: 80%;
+    justify-content: start;
+    align-items: center;
+}
+
+.clear-wish__div{
+    display: flex;
+
+    width: 10%;
+    justify-content: center;
+    align-items: center;
+}
+
+.clear-wish__div span{
+    cursor: pointer;
+}

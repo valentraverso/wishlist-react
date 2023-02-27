@@ -1,0 +1,27 @@
+.add-wish__div{
+    display: flex;
+
+    justify-content: center;
+    align-items: end;
+
+    height: 30vh;
+    background-image: url('https://cdnb.artstation.com/p/assets/images/images/034/182/355/medium/huleeb-395-25-jan-2021-final-c.jpg?1611620095');
+    background-size: cover;
+    background-position: center;
+}
+
+.add-wish__div input{
+    width: 50vh;
+
+    margin: 20px;
+    padding: 5px;
+
+    border: 1px solid #cdcdcd;
+    border-radius: 5px;
+    font-size: 25px;
+}
+
+.add-wish__div input:focus{
+   border: 2px solid rgb(45, 45, 233);
+   outline: none;
+}
