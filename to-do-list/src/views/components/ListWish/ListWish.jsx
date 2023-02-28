@@ -1,62 +1,58 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useWishContext from "../../../context/WishContext";
-import { deleteWish, changeWishStatus } from "../../../utils/utils";
+import { deleteWish, changeWishStatus, localStorage } from "../../../utils/utils";
 import './ListWish.css';
 
 export default function ListWishes({completed}) {
     const [wishList, setWishList] = useWishContext();
+    const [objFilter, setObjFilter] = useState([]);
+    const [msgShow, setMsgShow] = useState({status: false, msg: '', type: ''});
 
     useEffect(() => {
         const wishObj = JSON.parse(localStorage.getItem("wish-list"));
 
-        if(wishObj === null){
-            setWishList([]);
-            return;
-        } 
-
-        if(completed !== undefined){
-            setWishList(wishObj.filter(item => item.completed === completed));
-        }else{
-            setWishList(wishObj);
-        }
-    }, []);;
+        completed !== undefined ?
+        setObjFilter(wishObj.filter(item => item.completed === completed))
+        :
+        setObjFilter(wishObj)
+    }, [wishList]);
 
     const handleDelete = (id) => {
-        deleteWish(id);
-        const wishObj = JSON.parse(localStorage.getItem("wish-list"));
+        const objDelete = deleteWish(id);
+        setWishList(objDelete);
 
-        if(wishObj === null){
-            setWishList([]);
-            return;
-        } 
-
-        if(completed !== undefined){
-            setWishList(wishObj.filter(item => item.completed === completed));
-        }else{
-            setWishList(wishObj);
-        }
+        setMsgShow({...msgShow, status: true, msg: 'Task deleted', type: 'delete'})
+        setTimeout(() => {
+            setMsgShow({...msgShow, status: false, msg: '', type: ''})
+        }, 3000)
     }
 
     const handleComplete = (id) => {
-        changeWishStatus(id);
-        const wishObj = JSON.parse(localStorage.getItem("wish-list"));
-
-        if(completed !== undefined){
-            setWishList(wishObj.filter(item => item.completed === completed));
-        }else{
-            setWishList(wishObj);
-        }
+        const objChange = changeWishStatus(id);
+        setWishList(objChange);
     }
+
+    console.log(objFilter)
 
     return (
         <section className="list-wishes__section">
             {
-                wishList?.length >= 1 ?
+                msgShow.status ?
+                    <div className={`msg-${msgShow.type}__div`}>
+                        <p>{msgShow.msg}</p>
+                    </div>
+                : 
+                null
+            }
+            {
+                objFilter?.length === 0 ?
+                    <h1>Theres no active Task 🥲</h1>
+                    :
                     <div className="list-wishes__div">
                         <h2>Tasks</h2>
                         {
-                            wishList.map((item, index) => (
-                                <div className="row-list__div" key={index}>
+                            objFilter.map((item) => (
+                                <div className="row-list__div" key={item.id}>
                                     <div className="status-wish__div">
                                         {
                                             item.completed ?
@@ -75,8 +71,6 @@ export default function ListWishes({completed}) {
                             ))
                         }
                     </div>
-                    :
-                    <h1>Theres no active Task 🥲</h1>
             }
         </section>
     )

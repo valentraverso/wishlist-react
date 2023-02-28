@@ -53,6 +53,8 @@ const deleteWish = (id) => {
     }else{
         localStorage.removeItem("wish-list");
     }
+
+    return newWishList;
 }
 
 const changeWishStatus = (id) => {
@@ -78,6 +80,8 @@ const changeWishStatus = (id) => {
     })
 
     localStorage.setItem("wish-list", JSON.stringify(newWishList));
+
+    return newWishList;
 }
 
 export { localStorage, addWish, getWishList, deleteWish, changeWishStatus };
