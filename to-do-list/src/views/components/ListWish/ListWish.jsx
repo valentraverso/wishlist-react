@@ -1,29 +1,31 @@
 import { useEffect, useState } from "react";
 import useWishContext from "../../../context/WishContext";
-import { deleteWish, changeWishStatus, localStorage } from "../../../utils/utils";
+import { deleteWish, changeWishStatus, localStorage, editWish } from "../../../utils/utils";
 import './ListWish.css';
 
-export default function ListWishes({completed}) {
+export default function ListWishes({ completed }) {
     const [wishList, setWishList] = useWishContext();
     const [objFilter, setObjFilter] = useState([]);
-    const [msgShow, setMsgShow] = useState({status: false, msg: '', type: ''});
+    const [msgShow, setMsgShow] = useState({ status: false, msg: '', type: '' });
+
+    const [actualValue, setActualValue] = useState('');
 
     useEffect(() => {
         const wishObj = JSON.parse(localStorage.getItem("wish-list"));
 
         completed !== undefined ?
-        setObjFilter(wishObj.filter(item => item.completed === completed))
-        :
-        setObjFilter(wishObj)
+            setObjFilter(wishObj.filter(item => item.completed === completed))
+            :
+            setObjFilter(wishObj)
     }, [wishList]);
 
     const handleDelete = (id) => {
         const objDelete = deleteWish(id);
         setWishList(objDelete);
 
-        setMsgShow({...msgShow, status: true, msg: 'Task deleted', type: 'delete'})
+        setMsgShow({ ...msgShow, status: true, msg: 'Task deleted', type: 'delete' })
         setTimeout(() => {
-            setMsgShow({...msgShow, status: false, msg: '', type: ''})
+            setMsgShow({ ...msgShow, status: false, msg: '', type: '' })
         }, 3000)
     }
 
@@ -32,7 +34,30 @@ export default function ListWishes({completed}) {
         setWishList(objChange);
     }
 
-    console.log(objFilter)
+    const handleEdit = (ev, id) => {
+        if (ev.key === 'Enter') {
+            if (actualValue.length === 0) {
+                setMsgShow({ ...msgShow, status: true, msg: 'Please fill with more than 1 character to the task', type: 'delete' });
+                setTimeout(() => {
+                    setMsgShow({ ...msgShow, status: false, msg: '', type: '' })
+                }, 3000)
+            }else{
+                const objEdit = editWish(id, actualValue);
+            
+                setWishList(objEdit);
+
+                ev.target.blur();
+                ev.target.value = actualValue;
+            }
+            return;
+        }
+
+        setActualValue(ev.target.value);
+    }
+
+    const handleBlur = (ev, title) => {
+        ev.target.value = title;
+    }
 
     return (
         <section className="list-wishes__section">
@@ -41,8 +66,8 @@ export default function ListWishes({completed}) {
                     <div className={`msg-${msgShow.type}__div`}>
                         <p>{msgShow.msg}</p>
                     </div>
-                : 
-                null
+                    :
+                    null
             }
             {
                 objFilter?.length === 0 ?
@@ -62,7 +87,12 @@ export default function ListWishes({completed}) {
                                         }
                                     </div>
                                     <div className="info-wish__div">
-                                        <input className="change-wish-title__input" defaultValue={item.title} type='text' />
+                                        <input className="change-wish-title__input" 
+                                        defaultValue={item.title} 
+                                        onChange={(ev) => handleEdit(ev, item.id)} 
+                                        onKeyDown={(ev) => handleEdit(ev, item.id)} 
+                                        onBlur={(ev) => handleBlur(ev, item.title)}
+                                        type='text' />
                                     </div>
                                     <div className="clear-wish__div">
                                         <span onClick={() => handleDelete(item.id)}>X</span>

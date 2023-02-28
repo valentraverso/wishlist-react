@@ -84,4 +84,25 @@ const changeWishStatus = (id) => {
     return newWishList;
 }
 
-export { localStorage, addWish, getWishList, deleteWish, changeWishStatus };
+const editWish = (id, text) =>{
+    const JSONStorage = JSON.parse(localStorage.getItem("wish-list"));
+
+    const newWishList = [];
+
+    JSONStorage.map(item => {
+        if(item.id === id){
+            
+            newWishList.push({...item, title: text});
+    
+            return;
+        }
+
+        newWishList.push(item);
+    })
+
+    localStorage.setItem("wish-list", JSON.stringify(newWishList));
+
+    return newWishList;
+}
+
+export { localStorage, addWish, getWishList, deleteWish, changeWishStatus, editWish };
