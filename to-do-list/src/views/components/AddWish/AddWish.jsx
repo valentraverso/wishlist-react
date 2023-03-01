@@ -12,6 +12,7 @@ export default function AddWish() {
 
         if (wishTitle === null || wishTitle === '') {
             alert('Must fill the input with text!');
+            return;
         }
 
         addWish(wishTitle);

@@ -101,3 +101,7 @@
     color: rgb(243, 72, 72);
     cursor: pointer;
 }
+
+.line-through__span{
+    text-decoration: line-through;
+}

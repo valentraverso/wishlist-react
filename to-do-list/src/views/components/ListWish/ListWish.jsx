@@ -98,7 +98,7 @@ export default function ListWishes({ completed }) {
                                         }
                                     </div>
                                     <div className="info-wish__div">
-                                        <input className="change-wish-title__input"
+                                        <input className={item.completed ? 'change-wish-title__input line-through__span' : 'change-wish-title__input'}
                                             defaultValue={item.title}
                                             onChange={(ev) => handleEdit(ev, item.id)}
                                             onKeyDown={(ev) => handleEdit(ev, item.id)}
