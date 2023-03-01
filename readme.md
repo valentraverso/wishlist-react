@@ -33,7 +33,7 @@ You only need to write down the task and press enter to save it. Once you save i
 This is how a task looks like, isn't it cool?😁<br>
 
 _Task Status_: The grey circle at the left shows the task status, it only have two (active: grey color | completed: blue color)<br>
-_Task Title_: This field is editable and it's the task itself. You could click it to rewrite your task and then press enter to save the changes. In case you dont press enter, modifications aren't going to be save.
+_Task Title_: This field is editable and it's the task itself. You could click it to rewrite your task and then press enter to save the changes. In case you dont press enter, modifications aren't going to be save.<br>
 _Delete Task_: At the right be could see a cross, if you click this button the task will be deleted.
 
 ***Filter by task status***
