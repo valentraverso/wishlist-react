@@ -80,3 +80,24 @@
     margin: 10px 0;
     background-color: rgb(228, 90, 90);
 }
+
+.task-count__p{
+    margin:10px 0;
+
+    font-size: 15px;
+    color:#736f6f;
+}
+
+.footer-task-list__div{
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+.delete-all__span{
+    font-size: 14px;
+    color: rgb(243, 72, 72);
+    cursor: pointer;
+}

@@ -41,16 +41,16 @@ const deleteWish = (id) => {
     const newWishList = [];
 
     JSONStorage.map(item => {
-        if(item.id === id){
+        if (item.id === id) {
             return;
         }
 
         newWishList.push(item);
     })
 
-    if(newWishList.length > 0){
+    if (newWishList.length > 0) {
         localStorage.setItem("wish-list", JSON.stringify(newWishList));
-    }else{
+    } else {
         localStorage.removeItem("wish-list");
     }
 
@@ -63,16 +63,16 @@ const changeWishStatus = (id) => {
     const newWishList = [];
 
     JSONStorage.map(item => {
-        if(item.id === id){
-            switch(item.completed){
+        if (item.id === id) {
+            switch (item.completed) {
                 case false:
-                    newWishList.push({...item, completed: true});
+                    newWishList.push({ ...item, completed: true });
                     break;
-                case true: 
-                    newWishList.push({...item, completed: false});
+                case true:
+                    newWishList.push({ ...item, completed: false });
                     break;
             }
-            
+
             return;
         }
 
@@ -84,16 +84,16 @@ const changeWishStatus = (id) => {
     return newWishList;
 }
 
-const editWish = (id, text) =>{
+const editWish = (id, text) => {
     const JSONStorage = JSON.parse(localStorage.getItem("wish-list"));
 
     const newWishList = [];
 
     JSONStorage.map(item => {
-        if(item.id === id){
-            
-            newWishList.push({...item, title: text});
-    
+        if (item.id === id) {
+
+            newWishList.push({ ...item, title: text });
+
             return;
         }
 
@@ -105,4 +105,22 @@ const editWish = (id, text) =>{
     return newWishList;
 }
 
-export { localStorage, addWish, getWishList, deleteWish, changeWishStatus, editWish };
+const deleteAllWish = () => {
+    const JSONStorage = JSON.parse(localStorage.getItem("wish-list"));
+
+    const newWishList = [];
+
+    const filter = JSONStorage.filter(item => item.completed !== true);
+
+    if (filter.length === 0) {
+        localStorage.removeItem("wish-list");
+        return;
+    } else {
+        newWishList.push(filter);
+        localStorage.setItem("wish-list", JSON.stringify(newWishList));
+    }
+
+    return newWishList;
+}
+
+export { localStorage, addWish, getWishList, deleteWish, changeWishStatus, editWish, deleteAllWish };

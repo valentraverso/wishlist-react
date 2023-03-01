@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useWishContext from "../../../context/WishContext";
-import { deleteWish, changeWishStatus, localStorage, editWish } from "../../../utils/utils";
+import { deleteWish, changeWishStatus, localStorage, editWish, deleteAllWish } from "../../../utils/utils";
 import './ListWish.css';
 
 export default function ListWishes({ completed }) {
@@ -12,6 +12,11 @@ export default function ListWishes({ completed }) {
 
     useEffect(() => {
         const wishObj = JSON.parse(localStorage.getItem("wish-list"));
+
+        if(wishObj === null){
+            setObjFilter([]);
+            return;
+        }
 
         completed !== undefined ?
             setObjFilter(wishObj.filter(item => item.completed === completed))
@@ -34,6 +39,13 @@ export default function ListWishes({ completed }) {
         setWishList(objChange);
     }
 
+    const handleDeleteAll = () => {
+        const objDeleteAll = deleteAllWish();
+        setWishList(objDeleteAll);
+
+        console.table(objDeleteAll)
+    }
+
     const handleEdit = (ev, id) => {
         if (ev.key === 'Enter') {
             if (actualValue.length === 0) {
@@ -41,9 +53,9 @@ export default function ListWishes({ completed }) {
                 setTimeout(() => {
                     setMsgShow({ ...msgShow, status: false, msg: '', type: '' })
                 }, 3000)
-            }else{
+            } else {
                 const objEdit = editWish(id, actualValue);
-            
+
                 setWishList(objEdit);
 
                 ev.target.blur();
@@ -58,7 +70,6 @@ export default function ListWishes({ completed }) {
     const handleBlur = (ev, title) => {
         ev.target.value = title;
     }
-
     return (
         <section className="list-wishes__section">
             {
@@ -70,7 +81,7 @@ export default function ListWishes({ completed }) {
                     null
             }
             {
-                objFilter?.length === 0 ?
+                objFilter?.length === 0 || objFilter?.length == undefined ?
                     <h1>Theres no active Task 🥲</h1>
                     :
                     <div className="list-wishes__div">
@@ -87,12 +98,12 @@ export default function ListWishes({ completed }) {
                                         }
                                     </div>
                                     <div className="info-wish__div">
-                                        <input className="change-wish-title__input" 
-                                        defaultValue={item.title} 
-                                        onChange={(ev) => handleEdit(ev, item.id)} 
-                                        onKeyDown={(ev) => handleEdit(ev, item.id)} 
-                                        onBlur={(ev) => handleBlur(ev, item.title)}
-                                        type='text' />
+                                        <input className="change-wish-title__input"
+                                            defaultValue={item.title}
+                                            onChange={(ev) => handleEdit(ev, item.id)}
+                                            onKeyDown={(ev) => handleEdit(ev, item.id)}
+                                            onBlur={(ev) => handleBlur(ev, item.title)}
+                                            type='text' />
                                     </div>
                                     <div className="clear-wish__div">
                                         <span onClick={() => handleDelete(item.id)}>X</span>
@@ -100,6 +111,17 @@ export default function ListWishes({ completed }) {
                                 </div>
                             ))
                         }
+                        <div className='footer-task-list__div'>
+                            <p className="task-count__p">Tasks: {objFilter.length}</p>
+                            {
+                                completed ?
+                                    <span className='delete-all__span' onClick={handleDeleteAll}>
+                                        Delete all completed
+                                    </span>
+                                    :
+                                    null
+                            }
+                        </div>
                     </div>
             }
         </section>
