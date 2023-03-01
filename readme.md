@@ -22,7 +22,7 @@ Pd: take care of not closing the command prompt, it will stop the app.
 
 ***Creating new Task***
 
-<img src="https://i.ibb.co/d7RBbCT/Captura-de-pantalla-2023-03-01-103743.png" height="600px"/>
+<img src="https://i.ibb.co/d7RBbCT/Captura-de-pantalla-2023-03-01-103743.png" width="200" height="400"/>
 
 You only need to write down the task and press enter to save it. Once you save it, you will we able to see in the task list below.
 
