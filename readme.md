@@ -35,3 +35,9 @@ This is how a task looks like, isn't it cool?😁<br>
 _Task Status_: The grey circle at the left shows the task status, it only have two (active: grey color | completed: blue color)<br>
 _Task Title_: This field is editable and it's the task itself. You could click it to rewrite your task and then press enter to save the changes. In case you dont press enter, modifications aren't going to be save.
 _Delete Task_: At the right be could see a cross, if you click this button the task will be deleted.
+
+***Filter by task status***
+
+<img src="https://i.ibb.co/3fH3wYB/Captura-de-pantalla-2023-03-01-123239.png">
+
+This is simple filter where you could choose between: All (active tasks + completed tasks), Active (active tasks) and Completed (completed tasks).
