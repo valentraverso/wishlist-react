@@ -108,19 +108,17 @@ const editWish = (id, text) => {
 const deleteAllWish = () => {
     const JSONStorage = JSON.parse(localStorage.getItem("wish-list"));
 
-    const newWishList = [];
-
     const filter = JSONStorage.filter(item => item.completed !== true);
 
     if (filter.length === 0) {
         localStorage.removeItem("wish-list");
         return;
     } else {
-        newWishList.push(filter);
-        localStorage.setItem("wish-list", JSON.stringify(newWishList));
+        localStorage.removeItem("wish-list");
+        localStorage.setItem("wish-list", JSON.stringify(filter));
     }
 
-    return newWishList;
+    return filter;
 }
 
 export { localStorage, addWish, getWishList, deleteWish, changeWishStatus, editWish, deleteAllWish };
