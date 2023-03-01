@@ -16,4 +16,4 @@ This is how your command should look.
 
 ***Creating new Task***
 
-<img src='https://ibb.co/GFq7sY6'>
+<img src="https://i.ibb.co/d7RBbCT/Captura-de-pantalla-2023-03-01-103743.png" alt="Captura-de-pantalla-2023-03-01-103743" border="0">
