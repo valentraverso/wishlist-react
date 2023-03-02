@@ -11,11 +11,9 @@ mongoose.connect('mongodb+srv://valentinotraverso:DgzcMnnmOC1qNxBA@firstproject.
     .then(() => console.log('Hi Valentino! You are connected to the server'))
     .catch(error => console.log(error));
 
-app.post('/', (req, res) => {
-    const task = taskModel(req.body);
-    task.save()
-        .then(data => res.json(req.body))
-        .catch(error => res.json(error));
+app.get('/', (req, res) => {
+    taskModel.find()
+        .then(data => res.send(data))
 })
 
 // app.get('/', (req, res) => {
