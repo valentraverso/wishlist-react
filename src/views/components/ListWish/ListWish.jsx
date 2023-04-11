@@ -14,31 +14,18 @@ export default function ListWishes({ completed }) {
 
     const [actualValue, setActualValue] = useState('');
 
-    // useEffect(() => {
-    //     const wishObj = JSON.parse(localStorage.getItem("wish-list"));
+    useEffect(() => {
+        if (wishList === null) {
+            setObjFilter([]);
+            return;
+        }
 
-    //     if (wishObj === null) {
-    //         setObjFilter([]);
-    //         return;
-    //     }
+        completed === false || completed === true ?
+            setObjFilter(wishList.filter(item => item.completed === completed))
+            :
+            setObjFilter(wishList)
+    }, [wishList]);
 
-    //     completed !== undefined ?
-    //         setObjFilter(wishObj.filter(item => item.completed === completed))
-    //         :
-    //         setObjFilter(wishObj)
-    // }, [wishList]);
-
-
-    const { data, isLoading } = useQuery(['task'], async () => {
-        if (completed === undefined) {
-            const token = await getAccessTokenSilently();
-            const { data } = await fetchAllTask(token);
-
-            setObjFilter(data);
-        } 
-
-        return;
-    })
 
     const handleDelete = (id) => {
         const objDelete = deleteWish(id);

@@ -10,6 +10,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 export default function AddWish() {
     const { getAccessTokenSilently } = useAuth0();
     const [wishTitle, setWishTitle] = useState({ title: '', status: 0 });
+    const [wishList, setWishList] = useWishContext();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -29,10 +30,12 @@ export default function AddWish() {
         }
 
         const token = await getAccessTokenSilently();
-        const { status, msg } = await postTask(wishTitle, token);
+        const { status, msg, data } = await postTask(wishTitle, token);
 
         if (status === 'TRUE') {
             setWishTitle({ ...wishTitle, title: '' })
+
+            setWishList(prevState => [...prevState, data])
 
             toast.success('New task added✅', {
                 position: "top-center",
@@ -57,7 +60,6 @@ export default function AddWish() {
             });
         }
     }
-
     return (
         <div className="add-wish__div">
             <ToastContainer

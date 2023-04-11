@@ -10,12 +10,12 @@ const postTask = async (title, token) => {
         }
         
         const response = await fetch(`${import.meta.env.VITE_API_URL}/task/upload`, options);
-        const json = await response.json();
+        const {data} = await response.json();
 
         return {
             status: "TRUE",
             msg: "Task upload",
-            data: json
+            data
         };
     }catch(err){
         return{

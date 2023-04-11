@@ -8,7 +8,7 @@ export default function All(){
         <div className='central-section__div'>
             <AddWish /> 
             <StatusNav />
-            <ListWish />
+            <ListWish completed={"all"}/>
         </div>
     )
 }
