@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { updateTask } from "../../../api/updateTask";
 import useWishContext from "../../../context/WishContext";
-import { deleteWish, changeWishStatus, localStorage, editWish, deleteAllWish } from "../../../utils/utils";
-import './ListWish.css';
 import { useAuth0 } from "@auth0/auth0-react";
+import { deleteWish, changeWishStatus, localStorage, editWish, deleteAllWish } from "../../../utils/utils";
+import { ToastContainer, toast } from "react-toastify";
+import './ListWish.css';
 
 export default function ListWishes({ completed }) {
     const { getAccessTokenSilently } = useAuth0();
@@ -28,22 +29,15 @@ export default function ListWishes({ completed }) {
     }, [wishList]);
 
 
-    const handleDelete = (id) => {
+    const handleDelete = async (id) => {
+        const token = await getAccessTokenSilently();
+        const {data: {data}} = await deleteTask(token, id);
+
         const objDelete = deleteWish(id);
         setWishList(objDelete);
 
-        const newWishList = wishList.filter(item => item._id !== id)
+        const newWishList = wishList.filter(item => item._id !== id);
         setWishList(newWishList);
-
-        setMsgShow({ ...msgShow, status: true, msg: 'Task deleted', type: 'delete' })
-        setTimeout(() => {
-            setMsgShow({
-                ...msgShow,
-                status: false,
-                msg: '',
-                type: ''
-            })
-        }, 3000)
     }
 
     const handleComplete = async (id, completed) => {
@@ -59,6 +53,19 @@ export default function ListWishes({ completed }) {
 
             return task;
         })
+
+        if (newDataTask.completed) {
+            toast.success('Task completed ✅', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+        }
 
         setWishList(newWishList);
     }
@@ -128,7 +135,7 @@ export default function ListWishes({ completed }) {
                                             type='text' />
                                     </div>
                                     <div className="clear-wish__div">
-                                        <span onClick={() => handleDelete(item.id)}>X</span>
+                                        <span onClick={() => handleDelete(item._id)}>X</span>
                                     </div>
                                 </div>
                             ))

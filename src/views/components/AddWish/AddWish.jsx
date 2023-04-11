@@ -65,8 +65,9 @@ export default function AddWish() {
             <ToastContainer
                 position="top-center"
                 autoClose={5000}
+                limit={3}
                 hideProgressBar={false}
-                newestOnTop={false}
+                newestOnTop={true}
                 closeOnClick
                 rtl={false}
                 pauseOnFocusLoss
