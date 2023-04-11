@@ -40,8 +40,6 @@ export default function ListWishes({ completed }) {
         return;
     })
 
-    console.log(objFilter)
-
     const handleDelete = (id) => {
         const objDelete = deleteWish(id);
         setWishList(objDelete);

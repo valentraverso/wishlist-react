@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { useQuery } from "react-query";
 import useWishContext from "../../../context/WishContext";
 import { localStorage, addWish } from "../../../utils/utils";
 import './AddWish.css';
 import postTask from "../../../api/postTask";
-import { ToastContainer, toast  } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.min.css'
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function AddWish() {
+    const { getAccessTokenSilently } = useAuth0();
     const [wishTitle, setWishTitle] = useState({ title: '', status: 0 });
 
     const handleSubmit = async (e) => {
@@ -27,22 +28,34 @@ export default function AddWish() {
             return;
         }
 
+        const token = await getAccessTokenSilently();
+        const { status, msg } = await postTask(wishTitle, token);
 
-        const { status } = await postTask(wishTitle);
+        if (status === 'TRUE') {
+            setWishTitle({ ...wishTitle, title: '' })
 
-        (status === 'Upload') ? 
-        setWishTitle({ ...wishTitle, title: '' }) 
-        :
-        toast.error('There was an error!😭', {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-        });
+            toast.success('New task added✅', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+        } else {
+            toast.error(msg, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+        }
     }
 
     return (
