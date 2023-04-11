@@ -36,28 +36,8 @@ export default function AddWish() {
             setWishTitle({ ...wishTitle, title: '' })
 
             setWishList(prevState => [...prevState, data])
-
-            toast.success('New task added✅', {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: false,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-            });
         } else {
-            toast.error(msg, {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: false,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-            });
+            toast.error(msg);
         }
     }
     return (

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { updateTask } from "../../../api/updateTask";
 import useWishContext from "../../../context/WishContext";
 import { useAuth0 } from "@auth0/auth0-react";
 import { deleteWish, changeWishStatus, localStorage, editWish, deleteAllWish } from "../../../utils/utils";
 import { ToastContainer, toast } from "react-toastify";
 import './ListWish.css';
+import { updateTask, deleteTask } from "../../../api";
 
 export default function ListWishes({ completed }) {
     const { getAccessTokenSilently } = useAuth0();
@@ -31,18 +31,23 @@ export default function ListWishes({ completed }) {
 
     const handleDelete = async (id) => {
         const token = await getAccessTokenSilently();
-        const {data: {data}} = await deleteTask(token, id);
+        const { data: { status, msg } } = await deleteTask(token, id);
 
-        const objDelete = deleteWish(id);
-        setWishList(objDelete);
+        console.log()
 
-        const newWishList = wishList.filter(item => item._id !== id);
-        setWishList(newWishList);
+        if (status === "TRUE") {
+            toast.success(msg)
+        } else {
+            toast.error(msg);
+            return;
+        }
+
+        setWishList(wishList.filter(item => item._id !== id));
     }
 
     const handleComplete = async (id, completed) => {
         const token = await getAccessTokenSilently();
-        const { data: { data: newDataTask } } = await updateTask(token, id, { completed: !completed });
+        const { data: { data: newDataTask, msg, status } } = await updateTask(token, id, { completed: !completed });
 
         const newWishList = wishList.map(task => {
             if (task._id === newDataTask._id) {
@@ -50,21 +55,14 @@ export default function ListWishes({ completed }) {
                     ...newDataTask
                 }
             }
-
             return task;
         })
 
-        if (newDataTask.completed) {
-            toast.success('Task completed ✅', {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: false,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-            });
+        if (status === "TRUE") {
+            toast.success(msg)
+        } else {
+            toast.error(msg);
+            return;
         }
 
         setWishList(newWishList);

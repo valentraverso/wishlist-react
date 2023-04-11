@@ -28,8 +28,7 @@ const updateTask = async (token, idTask, update = undefined) => {
     } catch (err) {
         return ({
             status: "FALSE",
-            msg: "We have a problem while updating the task.",
-            log: err
+            msg: "We have a problem while updating the task."
         })
     }
 }
