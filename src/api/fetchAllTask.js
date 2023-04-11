@@ -1,6 +1,12 @@
-const fetchAllProducts = async () => {
+const fetchAllTask = async (token) => {
     try{
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/task`)
+        const options = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/task/all`, options)
         const json = await response.json();
 
         return json;
@@ -9,4 +15,4 @@ const fetchAllProducts = async () => {
     }
 }
 
-export default fetchAllProducts;
+export default fetchAllTask;

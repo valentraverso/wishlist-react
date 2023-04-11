@@ -4,8 +4,10 @@ import fetchAllTask from "../../../api/fetchAllTask";
 import useWishContext from "../../../context/WishContext";
 import { deleteWish, changeWishStatus, localStorage, editWish, deleteAllWish } from "../../../utils/utils";
 import './ListWish.css';
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function ListWishes({ completed }) {
+    const { getAccessTokenSilently } = useAuth0();
     const [wishList, setWishList] = useWishContext();
     const [objFilter, setObjFilter] = useState([]);
     const [msgShow, setMsgShow] = useState({ status: false, msg: '', type: '' });
@@ -29,12 +31,13 @@ export default function ListWishes({ completed }) {
 
     const { data, isLoading } = useQuery(['task'], async () => {
         if (completed === undefined) {
-            const {data} = await fetchAllTask();
-            setObjFilter(data);
-        } else {
-            return
-        }
+            const token = await getAccessTokenSilently();
+            const { data } = await fetchAllTask(token);
 
+            setObjFilter(data);
+        } 
+
+        return;
     })
 
     console.log(objFilter)
