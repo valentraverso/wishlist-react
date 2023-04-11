@@ -1,5 +1,5 @@
 const fetchAllTask = async (token) => {
-    try{
+    try {
         const options = {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -10,9 +10,9 @@ const fetchAllTask = async (token) => {
         const json = await response.json();
 
         return json;
-    }catch(err){
+    } catch (err) {
         throw new Error(`There was an error.`)
     }
 }
 
-export default fetchAllTask;
+export { fetchAllTask };
