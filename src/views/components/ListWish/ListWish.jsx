@@ -67,7 +67,7 @@ export default function ListWishes({ completed }) {
     }
 
     const handleDeleteAll = async () => {
-        Swal.fire({
+        const alert = await Swal.fire({
             title: 'Do you want to delete all tasks?',
             showDenyButton: true,
             showCancelButton: false,
@@ -78,13 +78,19 @@ export default function ListWishes({ completed }) {
                 confirmButton: 'order-2',
                 denyButton: 'order-3',
             }
-        }).then((result) => {
+        })
+        .then((result) => {
             if (result.isConfirmed) {
                 Swal.showLoading();
+                return true;
             } else if (result.isDenied) {
-                return;
+                return false;
             }
         })
+
+        if(!alert){
+            return;
+        }
 
         const token = await getAccessTokenSilently();
         const { data: { msg, status } } = await deleteAllTask(token);
