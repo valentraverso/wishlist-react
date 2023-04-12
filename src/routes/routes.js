@@ -21,7 +21,7 @@ const routes = [
             }, {
                 path: 'completed',
                 exact: true,
-                component: Completed,
+                component: Completed
             }
         ]
     }
