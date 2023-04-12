@@ -1,7 +1,8 @@
 const deleteAllTask = async (token) => {
     try{
-        const response = await fetch(`${import.meta.env.VITE_API_URL}`, 
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/task/delete/all`, 
         {
+            method: "DELETE",
             headers: {
                 Authorization: `Bearer ${token}`
             }

@@ -6,6 +6,7 @@ import { deleteWish, changeWishStatus, localStorage, editWish, deleteAllWish } f
 import { ToastContainer, toast } from "react-toastify";
 import './ListWish.css';
 import { updateTask, deleteTask, deleteAllTask } from "../../../api";
+import Swal from "sweetalert2";
 
 export default function ListWishes({ completed }) {
     const { getAccessTokenSilently } = useAuth0();
@@ -66,8 +67,27 @@ export default function ListWishes({ completed }) {
     }
 
     const handleDeleteAll = async () => {
+        Swal.fire({
+            title: 'Do you want to delete all tasks?',
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: 'Yes, please.',
+            denyButtonText: 'Cancel',
+            customClass: {
+                actions: 'my-actions',
+                confirmButton: 'order-2',
+                denyButton: 'order-3',
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.showLoading();
+            } else if (result.isDenied) {
+                return;
+            }
+        })
+
         const token = await getAccessTokenSilently();
-        const {data: {msg, status}} = await deleteAllTask(token);
+        const { data: { msg, status } } = await deleteAllTask(token);
 
         if (status === "TRUE") {
             toast.success(msg)
@@ -76,7 +96,9 @@ export default function ListWishes({ completed }) {
             return;
         }
 
-        setWishList([]);
+        await setWishList([]);
+
+        Swal.close();
     }
 
     const handleEdit = (ev, id) => {
@@ -108,9 +130,9 @@ export default function ListWishes({ completed }) {
         <section className="list-wishes__section">
             {
                 msgShow.status ??
-                    <div className={`msg-${msgShow.type}__div`}>
-                        <p>{msgShow.msg}</p>
-                    </div>
+                <div className={`msg-${msgShow.type}__div`}>
+                    <p>{msgShow.msg}</p>
+                </div>
             }
             {
                 objFilter?.length === 0 || objFilter?.length === undefined ?

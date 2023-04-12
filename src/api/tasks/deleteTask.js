@@ -1,6 +1,6 @@
 const deleteTask = async (token, id) => {
     try{
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/task/delete/${id}`,
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/task/delete/id/${id}`,
         {
             method: "DELETE",
             headers: {
