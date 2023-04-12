@@ -1,7 +1,7 @@
 import { createContext, useState, useContext } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useQuery } from "react-query";
-import { fetchAllTask } from "../api/fetchAllTask";
+import { fetchAllTask } from "../api/tasks/fetchAllTask";
 
 export const WishContext = createContext(null);
 

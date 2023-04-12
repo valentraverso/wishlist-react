@@ -5,7 +5,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { deleteWish, changeWishStatus, localStorage, editWish, deleteAllWish } from "../../../utils/utils";
 import { ToastContainer, toast } from "react-toastify";
 import './ListWish.css';
-import { updateTask, deleteTask } from "../../../api";
+import { updateTask, deleteTask, deleteAllTask } from "../../../api";
 
 export default function ListWishes({ completed }) {
     const { getAccessTokenSilently } = useAuth0();
@@ -27,7 +27,6 @@ export default function ListWishes({ completed }) {
             :
             setObjFilter(wishList)
     }, [wishList]);
-
 
     const handleDelete = async (id) => {
         const token = await getAccessTokenSilently();
@@ -58,9 +57,7 @@ export default function ListWishes({ completed }) {
             return task;
         })
 
-        if (status === "TRUE") {
-            toast.success(msg)
-        } else {
+        if (status === "FALSE") {
             toast.error(msg);
             return;
         }
@@ -68,11 +65,18 @@ export default function ListWishes({ completed }) {
         setWishList(newWishList);
     }
 
-    const handleDeleteAll = () => {
-        const objDeleteAll = deleteAllWish();
-        setWishList(objDeleteAll);
+    const handleDeleteAll = async () => {
+        const token = await getAccessTokenSilently();
+        const {data: {msg, status}} = await deleteAllTask(token);
 
-        console.table(objDeleteAll)
+        if (status === "TRUE") {
+            toast.success(msg)
+        } else {
+            toast.error(msg);
+            return;
+        }
+
+        setWishList([]);
     }
 
     const handleEdit = (ev, id) => {
@@ -103,12 +107,10 @@ export default function ListWishes({ completed }) {
     return (
         <section className="list-wishes__section">
             {
-                msgShow.status ?
+                msgShow.status ??
                     <div className={`msg-${msgShow.type}__div`}>
                         <p>{msgShow.msg}</p>
                     </div>
-                    :
-                    null
             }
             {
                 objFilter?.length === 0 || objFilter?.length === undefined ?

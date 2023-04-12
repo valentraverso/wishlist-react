@@ -2,7 +2,7 @@ import { useState } from "react";
 import useWishContext from "../../../context/WishContext";
 import { localStorage, addWish } from "../../../utils/utils";
 import './AddWish.css';
-import postTask from "../../../api/postTask";
+import { postTask } from "../../../api";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.min.css'
 import { useAuth0 } from "@auth0/auth0-react";

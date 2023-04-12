@@ -3,12 +3,12 @@ import ListWish from '../../components/ListWish/ListWish';
 import StatusNav from '../../components/StatusNav/StatusNav.jsx';
 import './All.css';
 
-export default function All(){
-    return(
+export default function All() {
+    return (
         <div className='central-section__div'>
-            <AddWish /> 
+            <AddWish />
             <StatusNav />
-            <ListWish completed={"all"}/>
+            <ListWish completed={"all"} />
         </div>
     )
 }

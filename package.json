@@ -1,7 +1,7 @@
 {
   "name": "to-do-list",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "commonjs",
   "scripts": {
     "dev": "vite",
@@ -15,7 +15,8 @@
     "react-dom": "^18.2.0",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.8.1",
-    "react-toastify": "^9.1.2"
+    "react-toastify": "^9.1.2",
+    "sweetalert2": "^11.7.3"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",
