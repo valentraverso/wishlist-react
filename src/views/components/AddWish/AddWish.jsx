@@ -35,7 +35,7 @@ export default function AddWish() {
         if (status === 'TRUE') {
             setWishTitle({ ...wishTitle, title: '' })
 
-            setWishList(prevState => [...prevState, data])
+            setWishList(prevState => [data, ...prevState])
         } else {
             toast.error(msg);
         }
