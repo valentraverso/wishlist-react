@@ -1,21 +1,19 @@
 import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
-import useWishContext from "../../../context/WishContext";
 import { useAuth0 } from "@auth0/auth0-react";
-import { deleteWish, changeWishStatus, localStorage, editWish, deleteAllWish } from "../../../utils/utils";
-import { toast } from "react-toastify";
-import './ListWish.css';
+import useWishContext from "../../../context/WishContext";
 import { updateTask, deleteTask, deleteAllTask } from "../../../api";
+import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import './ListWish.css';
 
 export default function ListWishes({ completed }) {
-    const { getAccessTokenSilently } = useAuth0();
+    const { getAccessTokenSilently, user } = useAuth0();
 
     const [wishList, setWishList] = useWishContext();
     const [objFilter, setObjFilter] = useState([]);
     const [msgShow, setMsgShow] = useState({ status: false, msg: '', type: '' });
 
-    const [actualValue, setActualValue] = useState('');
+    console.log(user)
 
     useEffect(() => {
         if (wishList === null) {
