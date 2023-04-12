@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 import useWishContext from "../../../context/WishContext";
 import { useAuth0 } from "@auth0/auth0-react";
 import { deleteWish, changeWishStatus, localStorage, editWish, deleteAllWish } from "../../../utils/utils";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import './ListWish.css';
 import { updateTask, deleteTask, deleteAllTask } from "../../../api";
 import Swal from "sweetalert2";
@@ -32,8 +32,6 @@ export default function ListWishes({ completed }) {
     const handleDelete = async (id) => {
         const token = await getAccessTokenSilently();
         const { data: { status, msg } } = await deleteTask(token, id);
-
-        console.log()
 
         if (status === "TRUE") {
             toast.success(msg)
@@ -171,11 +169,11 @@ export default function ListWishes({ completed }) {
                         <div className='footer-task-list__div'>
                             <p className="task-count__p">Tasks: {objFilter.length}</p>
                             {
-                                completed ?
+                                completed === 'all'?
                                     <span className='delete-all__span' onClick={handleDeleteAll}>
-                                        Delete all completed
+                                        Delete all
                                     </span>
-                                    :
+                                    : 
                                     null
                             }
                         </div>

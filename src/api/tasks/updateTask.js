@@ -1,12 +1,6 @@
 const updateTask = async (token, idTask, update = undefined) => {
-    const formData = new FormData();
 
-    if(update === undefined){
-        return{
-            status: "FALSE",
-            msg: "Please add data to update."
-        }
-    }
+
 
     try {
         const options = {
@@ -22,13 +16,13 @@ const updateTask = async (token, idTask, update = undefined) => {
 
         return {
             status: "TRUE",
-            msg: "Register update.",
+            msg: "Task updated.",
             data: json
         }
     } catch (err) {
         return ({
             status: "FALSE",
-            msg: "We have a problem while updating the task."
+            msg: err
         })
     }
 }
