@@ -7,13 +7,11 @@ import Swal from "sweetalert2";
 import './ListWish.css';
 
 export default function ListWishes({ completed }) {
-    const { getAccessTokenSilently, user } = useAuth0();
+    const { getAccessTokenSilently} = useAuth0();
 
     const [wishList, setWishList] = useWishContext();
     const [objFilter, setObjFilter] = useState([]);
     const [msgShow, setMsgShow] = useState({ status: false, msg: '', type: '' });
-
-    console.log(user)
 
     useEffect(() => {
         if (wishList === null) {
