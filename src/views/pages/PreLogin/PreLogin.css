@@ -1,0 +1,21 @@
+.section-prelogin__section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.text-principal__h1{
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.button-login__span {
+    background-color: #6f318c;
+    color: #fff;
+    font-size: 30px;
+    border-radius: 5px;
+    padding: 30px 100px;
+    cursor: pointer;
+}

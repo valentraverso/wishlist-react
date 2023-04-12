@@ -1,5 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { Dna } from 'react-loader-spinner'
+import PreLogin from "../views/pages/PreLogin/PreLogin";
 
 const PrivateRoutes = ({ children }) => {
     const { isAuthenticated, loginWithRedirect, isLoading } = useAuth0();
@@ -24,7 +25,7 @@ const PrivateRoutes = ({ children }) => {
                     isAuthenticated ?
                         children
                         :
-                        <p onClick={() => loginWithRedirect()}>Login</p>
+                        <PreLogin />
             }
         </>
     )
