@@ -77,16 +77,16 @@ export default function ListWishes({ completed }) {
                 denyButton: 'order-3',
             }
         })
-        .then((result) => {
-            if (result.isConfirmed) {
-                Swal.showLoading();
-                return true;
-            } else if (result.isDenied) {
-                return false;
-            }
-        })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    Swal.showLoading();
+                    return true;
+                } else if (result.isDenied) {
+                    return false;
+                }
+            })
 
-        if(!alert){
+        if (!alert) {
             return;
         }
 
@@ -105,25 +105,38 @@ export default function ListWishes({ completed }) {
         Swal.close();
     }
 
-    const handleEdit = (ev, id) => {
-        if (ev.key === 'Enter') {
-            if (actualValue.length === 0) {
+    const handleEdit = async (ev, id) => {
+        const {target: {value}} = ev;
+        if (ev.key === 'Enter') {     
+            if (value.length === 0) {
                 setMsgShow({ ...msgShow, status: true, msg: 'Please fill with more than 1 character to the task', type: 'delete' });
                 setTimeout(() => {
                     setMsgShow({ ...msgShow, status: false, msg: '', type: '' })
                 }, 3000)
             } else {
-                const objEdit = editWish(id, actualValue);
+                const token = await getAccessTokenSilently();
+                const { data: { data: newDataTask, msg, status } } = await updateTask(token, id, { title: value });
 
-                setWishList(objEdit);
+                const newWishList = await wishList.map(task => {
+                    if (task._id === newDataTask._id) {
+                        return {
+                            ...newDataTask
+                        }
+                    }
+                    return task;
+                })
 
-                ev.target.blur();
-                ev.target.value = actualValue;
+                await setWishList(newWishList);
+
+                if (status === "TRUE") {
+                    toast.success(msg)
+                } else {
+                    toast.error(msg);
+                    return;
+                }
             }
             return;
         }
-
-        setActualValue(ev.target.value);
     }
 
     const handleBlur = (ev, title) => {
@@ -155,8 +168,8 @@ export default function ListWishes({ completed }) {
                                     <div className="info-wish__div">
                                         <input className={item.completed ? 'change-wish-title__input line-through__span' : 'change-wish-title__input'}
                                             defaultValue={item.title}
-                                            onChange={(ev) => handleEdit(ev, item.id)}
-                                            onKeyDown={(ev) => handleEdit(ev, item.id)}
+                                            onChange={(ev) => handleEdit(ev, item._id)}
+                                            onKeyDown={(ev) => handleEdit(ev, item._id)}
                                             onBlur={(ev) => handleBlur(ev, item.title)}
                                             type='text' />
                                     </div>
@@ -169,11 +182,11 @@ export default function ListWishes({ completed }) {
                         <div className='footer-task-list__div'>
                             <p className="task-count__p">Tasks: {objFilter.length}</p>
                             {
-                                completed === 'all'?
+                                completed === 'all' ?
                                     <span className='delete-all__span' onClick={handleDeleteAll}>
                                         Delete all
                                     </span>
-                                    : 
+                                    :
                                     null
                             }
                         </div>
