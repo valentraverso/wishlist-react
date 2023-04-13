@@ -8,7 +8,7 @@ export default function Archive() {
         <div className='central-section__div'>
             <AddWish />
             <StatusNav />
-            <ListWish completed={"all"} />        
+            <ListWish completed={"archive"} />        
         </div>
     )
 }
