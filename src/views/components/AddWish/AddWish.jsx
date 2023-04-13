@@ -9,7 +9,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 export default function AddWish() {
     const { getAccessTokenSilently } = useAuth0();
-    const [wishTitle, setWishTitle] = useState({ title: '', status: 0 });
+    const [wishTitle, setWishTitle] = useState({ title: ''});
     const [wishList, setWishList] = useWishContext();
 
     const handleSubmit = async (e) => {
@@ -30,7 +30,9 @@ export default function AddWish() {
         }
 
         const token = await getAccessTokenSilently();
-        const { status, msg, data } = await postTask(wishTitle, token);
+        const { status, msg, data } = await postTask({...wishTitle, status: 1}, token);
+
+        console.log(msg)
 
         if (status === 'TRUE') {
             setWishTitle({ ...wishTitle, title: '' })

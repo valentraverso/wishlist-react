@@ -1,9 +1,9 @@
 import AddWish from '../../components/AddWish/AddWish';
 import ListWish from '../../components/ListWish/ListWish';
 import StatusNav from '../../components/StatusNav/StatusNav.jsx';
-import './All.css';
+import './Archive.css';
 
-export default function All() {
+export default function Archive() {
     return (
         <div className='central-section__div'>
             <AddWish />

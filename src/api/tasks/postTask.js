@@ -1,4 +1,4 @@
-const postTask = async (title, token) => {
+const postTask = async (objPost, token) => {
     try {
         const options = {
             method: 'POST',
@@ -6,7 +6,7 @@ const postTask = async (title, token) => {
                 'Content-type': 'application/json',
                 Authorization: `Bearer ${token}`
             },
-            body: JSON.stringify(title)
+            body: JSON.stringify(objPost)
         }
 
         const response = await fetch(`${import.meta.env.VITE_API_URL}/task/upload`, options);
