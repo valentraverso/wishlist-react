@@ -20,6 +20,11 @@ export default function StatusNav() {
                         Completed
                     </NavLink>
                 </span>
+                <span>
+                    <NavLink to={'/archive'}>
+                        Archive
+                    </NavLink>
+                </span>
             </div>
         </div>
     )
