@@ -195,9 +195,12 @@ export default function ListWishes({ completed }) {
                             objFilter.map((item) => (
                                 <div className="row-list__div" key={item._id}>
                                     <div className="status-wish__div">
-                                        <span
-                                            className={!item.completed ? "uncompleted-task__span" : "completed-task__span"}
-                                            onClick={() => handleComplete(item._id, item.completed)} />
+                                        {
+                                            item.status !== 2 &&
+                                            <span
+                                                className={!item.completed ? "uncompleted-task__span" : "completed-task__span"}
+                                                onClick={() => handleComplete(item._id, item.completed)} />
+                                        }
                                     </div>
                                     <div className="info-wish__div">
                                         <input className={item.completed ? 'change-wish-title__input line-through__span' : 'change-wish-title__input'}
@@ -210,9 +213,13 @@ export default function ListWishes({ completed }) {
                                     <div className="clear-wish__div">
                                         {
                                             item.completed &&
-                                            <span
-                                                onClick={() => handleStatus(item._id, item.status)}>
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="m21.706 5.292-2.999-2.999A.996.996 0 0 0 18 2H6a.996.996 0 0 0-.707.293L2.294 5.292A.994.994 0 0 0 2 6v13c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V6a.994.994 0 0 0-.294-.708zM6.414 4h11.172l1 1H5.414l1-1zM4 19V7h16l.002 12H4z"></path><path d="M14 9h-4v3H7l5 5 5-5h-3z"></path></svg>
+                                            <span onClick={() => handleStatus(item._id, item.status)}>
+                                                {
+                                                    item.status === 1 ?
+                                                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="m21.706 5.292-2.999-2.999A.996.996 0 0 0 18 2H6a.996.996 0 0 0-.707.293L2.294 5.292A.994.994 0 0 0 2 6v13c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V6a.994.994 0 0 0-.294-.708zM6.414 4h11.172l1 1H5.414l1-1zM4 19V7h16l.002 12H4z"></path><path d="M14 9h-4v3H7l5 5 5-5h-3z"></path></svg>
+                                                        :
+                                                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="m21.706 5.292-2.999-2.999A.996.996 0 0 0 18 2H6a.996.996 0 0 0-.707.293L2.294 5.292A.994.994 0 0 0 2 6v13c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V6a.994.994 0 0 0-.294-.708zM6.414 4h11.172l1 1H5.414l1-1zM4 19V7h16l.002 12H4z"></path><path d="M7 14h3v3h4v-3h3l-5-5z"></path></svg>
+                                                }
                                             </span>
                                         }
                                         <span onClick={() => handleDelete(item._id)}>X</span>
