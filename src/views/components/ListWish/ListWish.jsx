@@ -24,7 +24,7 @@ export default function ListWishes({ completed }) {
         }
         switch (completed) {
             case true:
-                setObjFilter(wishList.filter(item => item.completed === completed));
+                setObjFilter(wishList.filter(item => item.completed === completed && item.status !== 2));
                 break;
             case false:
                 setObjFilter(wishList.filter(item => item.completed === completed));
