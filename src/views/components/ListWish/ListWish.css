@@ -56,12 +56,17 @@
     display: flex;
 
     width: 10%;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
 }
 
 .clear-wish__div span{
     cursor: pointer;
+}
+
+.clear-wish__div svg{
+    padding-top: 6px;
+    font-size: 18px;
 }
 
 .change-wish-title__input{
