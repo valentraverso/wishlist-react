@@ -31,8 +31,6 @@ export default function AddWish() {
         const token = await getAccessTokenSilently();
         const { status, msg, data } = await postTask({...wishTitle, status: 1}, token);
 
-        console.log(msg)
-
         if (status === 'TRUE') {
             setWishTitle({ ...wishTitle, title: '' })
 

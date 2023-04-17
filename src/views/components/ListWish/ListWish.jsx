@@ -27,11 +27,16 @@ export default function ListWishes({ completed, filterBy, filterValue }) {
 
         // Set object filter by title of the task (Search page)
         if (filterBy !== undefined) {
-            if (filterValue === undefined) {
+            if (filterValue.length === 0) {
                 setObjFilter([]);
                 return;
             }
-            setObjFilter(wishList.filter(({title}) => title.trim().toLowerCase().includes(filterValue)));
+
+            switch (filterBy) {
+                case "title":
+                    setObjFilter(wishList.filter(({ title }) => title.trim().toLowerCase().includes(filterValue)));
+                    break;
+            }
         }
 
         switch (completed) {
@@ -48,7 +53,7 @@ export default function ListWishes({ completed, filterBy, filterValue }) {
                 setObjFilter(wishList.filter(item => item.status === 2));
                 break;
         }
-    }, [wishList]);
+    }, [wishList, filterValue]);
 
     const handleDelete = async (id) => {
         const token = await getAccessTokenSilently();
@@ -199,7 +204,7 @@ export default function ListWishes({ completed, filterBy, filterValue }) {
             }
             {
                 objFilter?.length === 0 || objFilter?.length === undefined ?
-                    <h1>There's no task to show🥲</h1>
+                    <h1 > There's no task to show🥲</h1>
                     :
                     <div className="list-wishes__div">
                         <h2>Tasks</h2>
@@ -230,7 +235,7 @@ export default function ListWishes({ completed, filterBy, filterValue }) {
                                                     item.status === 1 ?
                                                         <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="m21.706 5.292-2.999-2.999A.996.996 0 0 0 18 2H6a.996.996 0 0 0-.707.293L2.294 5.292A.994.994 0 0 0 2 6v13c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V6a.994.994 0 0 0-.294-.708zM6.414 4h11.172l1 1H5.414l1-1zM4 19V7h16l.002 12H4z"></path><path d="M14 9h-4v3H7l5 5 5-5h-3z"></path></svg>
                                                         :
-                                                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="m21.706 5.292-2.999-2.999A.996.996 0 0 0 18 2H6a.996.996 0 0 0-.707.293L2.294 5.292A.994.994 0 0 0 2 6v13c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V6a.994.994 0 0 0-.294-.708zM6.414 4h11.172l1 1H5.414l1-1zM4 19V7h16l.002 12H4z"></path><path d="M7 14h3v3h4v-3h3l-5-5z"></path></svg>
+                                                        <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="m21.706 5.292-2.999-2.999A.996.996 0 0 0 18 2H6a.996.996 0 0 0-.707.293L2.294 5.292A.994.994 0 0 0 2 6v13c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V6a.994.994 0 0 0-.294-.708zM6.414 4h11.172l1 1H5.414l1-1zM4 19V7h16l.002 12H4z"></path><path d="M7 14h3v3h4v-3h3l-5-5z"></path></svg>
                                                 }
                                             </span>
                                         }
@@ -252,6 +257,6 @@ export default function ListWishes({ completed, filterBy, filterValue }) {
                         </div>
                     </div>
             }
-        </section>
+        </section >
     )
 }
