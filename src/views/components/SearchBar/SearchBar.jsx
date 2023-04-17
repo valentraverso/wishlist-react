@@ -1,10 +1,10 @@
 import useWishContext from '../../../context/WishContext';
 import './SearchBar.css';
 
-export default function SearchBar() {
+export default function SearchBar({ setWishSearch }) {
     const [wishlist, setWishlist] = useWishContext();
 
-    console.log(wishlist)
+    
     return (
         <div className="add-wish__div">
             <form>
