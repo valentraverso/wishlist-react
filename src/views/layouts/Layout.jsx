@@ -1,11 +1,11 @@
-import { DOMSubRoutes } from '../../routes/DOMRoutes.jsx';
+import { Outlet } from 'react-router-dom';
 import Profile from '../components/Profile/Profile.jsx';
 
-export default function Layout({ routes }) {
+export default function Layout() {
     return (
         <>
             <Profile />
-            <DOMSubRoutes routes={routes} />
+            <Outlet />
         </>
     );
 }

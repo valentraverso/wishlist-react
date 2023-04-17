@@ -1,6 +1,5 @@
 import { useState } from "react";
 import useWishContext from "../../../context/WishContext";
-import { localStorage, addWish } from "../../../utils/utils";
 import './AddWish.css';
 import { postTask } from "../../../api";
 import { ToastContainer, toast } from "react-toastify";
