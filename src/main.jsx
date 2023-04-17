@@ -3,7 +3,7 @@ import { WishListContext } from './context/WishContext.jsx'
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Auth0Provider } from "@auth0/auth0-react";
 import Router from './routes/router.jsx';
-import './App.css';
+import './Main.css';
 
 const queryClient = new QueryClient();
 

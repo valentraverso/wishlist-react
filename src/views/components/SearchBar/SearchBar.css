@@ -1,15 +1,3 @@
-.add-wish__div{
-    display: flex;
-
-    justify-content: center;
-    align-items: end;
-
-    height: 30vh;
-    background-image: url('https://cdnb.artstation.com/p/assets/images/images/034/182/355/medium/huleeb-395-25-jan-2021-final-c.jpg?1611620095');
-    background-size: cover;
-    background-position: center;
-}
-
 .add-wish__div input{
     width: 50vh;
 
@@ -24,4 +12,15 @@
 .add-wish__div input:focus{
    border: 2px solid rgb(45, 45, 233);
    outline: none;
+}
+
+@media screen and (max-width:780px){
+    .add-wish__div{
+        width: 100%;
+        background-image: url('https://w0.peakpx.com/wallpaper/456/402/HD-wallpaper-beautiful-evening-landscape-minimal-8k-landscape-morning-artist-artwork-digital-art-minimalism-minimalist.jpg');
+    }
+    .add-wish__div input{
+        width: 100%;
+        margin: 20px 0;
+    }
 }

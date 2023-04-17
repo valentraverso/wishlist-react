@@ -25,3 +25,13 @@
    border: 2px solid rgb(45, 45, 233);
    outline: none;
 }
+
+@media screen and (max-width:780px){
+    .add-wish__div{
+        width: 100%;
+    }
+    .add-wish__div input{
+        width: 100%;
+        margin: 20px 0;
+    }
+}

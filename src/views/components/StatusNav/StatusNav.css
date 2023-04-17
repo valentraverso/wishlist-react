@@ -18,3 +18,13 @@
     color:rgb(95, 95, 233);
     font-weight: 600;
 }
+
+@media screen and (max-width:780px){
+    .status-nav__div{
+        justify-content: start;
+        margin-left: 20px;
+    }
+    .nav-buttons__div{
+        width: 100%;
+    }
+}

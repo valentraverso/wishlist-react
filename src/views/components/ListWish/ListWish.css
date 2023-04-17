@@ -110,3 +110,9 @@
 .line-through__span{
     text-decoration: line-through;
 }
+
+@media screen and (max-width:780px){
+    .list-wishes__section{
+        width: 90%;
+    }
+}
