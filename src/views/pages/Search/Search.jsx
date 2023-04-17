@@ -10,7 +10,7 @@ export default function Search(){
         <div className='central-section__div'>
                  <SearchBar setWishSearch={setWishSearch}/> 
                  <StatusNav />
-                 <ListWishes by="title" value={wishSearch} />
+                 <ListWishes filterBy="title" filterValue={wishSearch} />
         </div>
     )
 }

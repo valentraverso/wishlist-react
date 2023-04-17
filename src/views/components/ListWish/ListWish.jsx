@@ -31,8 +31,7 @@ export default function ListWishes({ completed, filterBy, filterValue }) {
                 setObjFilter([]);
                 return;
             }
-
-
+            setObjFilter(wishList.filter(({title}) => title.trim().toLowerCase().includes(filterValue)));
         }
 
         switch (completed) {
