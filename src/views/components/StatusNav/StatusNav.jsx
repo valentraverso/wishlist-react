@@ -25,6 +25,11 @@ export default function StatusNav() {
                         Archive
                     </NavLink>
                 </span>
+                <span>
+                    <NavLink to={'/search'}>
+                        Search 🔍
+                    </NavLink>
+                </span>
             </div>
         </div>
     )
