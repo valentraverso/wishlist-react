@@ -2,6 +2,11 @@
 
 App to save your daily tasks, where you could mark them as done, modify and delete all donde tasks.
 
+Index:
+- [Getting Started](#getting-started)
+- [Features](#features)
+- [How to use](#how-to-use)
+
 ## Getting Started
 
 **`npm install`**
@@ -17,6 +22,10 @@ This is how your command should look.
 This command its to run the project into develop mode, so only you could use the app while running this script.
 
 Pd: take care of not closing the command prompt, it will stop the app.
+
+## Features
+ - ✨ Backend requests
+ - 👤 User authentication
 
 ## How to use
 
