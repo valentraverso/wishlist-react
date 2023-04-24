@@ -28,6 +28,7 @@ Pd: take care of not closing the command prompt, it will stop the app.
 ## Deploy
 
 **`npm run build`**
+
 With this command you create the folder <i>dist</i>, where it's store all the docs you need to upload in your hosting.
 
 <b>But first:</b>
