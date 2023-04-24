@@ -5,6 +5,7 @@ App to save your daily tasks, where you could mark them as done, modify and dele
 
 Index:
 - [Getting Started](#getting-started)
+- [Deploy](#deploy)
 - [Features](#features)
 - [How to use](#how-to-use)
 
@@ -23,6 +24,15 @@ This is how your command should look.
 This command its to run the project into develop mode, so only you could use the app while running this script.
 
 Pd: take care of not closing the command prompt, it will stop the app.
+
+## Deploy
+
+**`npm run build`**
+With this command you create the folder <i>dist</i>, where it's store all the docs you need to upload in your hosting.
+
+<b>But first:</b>
+- You need to change the basename in "./src/routes/router.jsx".
+- You need to change the base in "./vite.config.js"
 
 ## Features
  - ✨ Backend requests
