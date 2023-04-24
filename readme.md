@@ -1,3 +1,4 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 # To do List
 
 App to save your daily tasks, where you could mark them as done, modify and delete all donde tasks.
@@ -50,3 +51,7 @@ _Delete Task_: At the right we could see a cross, if you click this button the t
 <img src="https://i.ibb.co/3fH3wYB/Captura-de-pantalla-2023-03-01-123239.png">
 
 This is simple filter where you could choose between: All (active tasks + completed tasks), Active (active tasks) and Completed (completed tasks).
+
+## Author
+
+- [Valentino Traverso](https://github.com/valentraverso)
